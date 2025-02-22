@@ -8,6 +8,7 @@ export const handleSubmit = async (req, res, next) => {
     const {
       regNumber,
       name,
+      year,
       title,
       mobile,
       section,
@@ -38,6 +39,7 @@ export const handleSubmit = async (req, res, next) => {
     const newRow = [
       regNumber,
       name,
+      year,
       title,
       mobile,
       section,

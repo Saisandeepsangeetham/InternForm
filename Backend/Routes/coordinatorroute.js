@@ -1,10 +1,9 @@
-import express from "express"
-import { getCoordinatorDetails } from "../Controller/coordinatorcontroller";
+import express from "express";
+import { handleBatch1,handleBatch2,handleBatch3,handleBatch4 } from "../Controller/coordinatorcontroller.js";
 
-const router = express.Router();
-const coordinatorController = require('../controllers/coordinatorController');
+const Coordinator_Router = express.Router();
 
-// Endpoint to get coordinator details
-router.get('/coordinator', coordinatorController.getCoordinatorDetails);
+Coordinator_Router.get('/getbatch1',handleBatch1);
+Coordinator_Router.get('/getbatch2',handleBatch2);
 
-module.exports = router;
+export default Coordinator_Router;
