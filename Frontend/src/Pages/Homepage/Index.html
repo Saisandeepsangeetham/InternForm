@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./styles.css" />
+    <title>Home</title>
+    <script defer src="index.js"></script>
+  </head>
+  <body>
+    <nav>
+      <ul>
+        <li>Intern-Form</li>
+        <li class="name-pic">
+          <span>Name</span>
+          <img src="path_to_picture" alt="User Picture" />
+        </li>
+      </ul>
+    </nav>
+    <h1>Intern Form</h1>
+    <div class="form-container">
+      <form action="" method="post">
+        <label for="reg-number">Register Number</label>
+        <input type="text" name="reg-number" id="reg-number" required />
+
+        <label for="name">Name</label>
+        <input type="text" name="name" id="name" required />
+
+        <label for="title">Title</label>
+        <input type="text" name="title" id="title" required />
+
+        <label for="mobile">Mobile Number</label>
+        <input type="tel" name="mobile" id="mobile" required />
+
+        <label for="section">Section</label>
+        <select name="section" id="section" required>
+          <option value="">--Select Section--</option>
+          <option value="A">A</option>
+          <option value="B">B</option>
+          <option value="C">C</option>
+        </select>
+
+        <label for="internship-obtained">Obtained Internship</label>
+        <select name="internship-obtained" id="internship-obtained" required>
+          <option value="">--Select Option--</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+
+        <label for="start-date">Internship Start Date</label>
+        <input type="date" name="start-date" id="start-date" required />
+
+        <label for="end-date">Internship End Date</label>
+        <input type="date" name="end-date" id="end-date" required />
+
+        <label for="period">Period (in months)</label>
+        <input
+          type="text"
+          name="period"
+          id="period"
+          placeholder="Calculated automatically"
+          readonly />
+
+        <label for="company-name">Company Name</label>
+        <input type="text" name="company-name" id="company-name" required />
+
+        <label for="placement-source">Placement Source</label>
+        <select name="placement-source" id="placement-source" required>
+          <option value="">--Select Option--</option>
+          <option value="cdc">Through CDC</option>
+          <option value="offcampus">Off Campus</option>
+        </select>
+
+        <label for="stipend">Stipend</label>
+        <input
+          type="text"
+          name="stipend"
+          id="stipend"
+          placeholder="Enter amount if any" />
+
+        <label for="internship-type">Internship Type</label>
+        <select name="internship-type" id="internship-type" required>
+          <option value="">--Select Option--</option>
+          <option value="research">Research Based</option>
+          <option value="normal">Normal Internship</option>
+        </select>
+
+        <label for="location">Location</label>
+        <select name="location" id="location" required>
+          <option value="">--Select Option--</option>
+          <option value="abroad">Abroad</option>
+          <option value="india">India</option>
+        </select>
+
+        <label for="document-submission">Document Submission</label>
+        <input
+          type="file"
+          name="document-submission"
+          id="document-submission"
+          required />
+
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  </body>
+</html>

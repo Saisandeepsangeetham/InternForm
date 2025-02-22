@@ -1,0 +1,14 @@
+[
+    {
+      "email": "coordinator@example.com",
+      "access_level": "Coordinator"
+    },
+    {
+      "email": "staff1@example.com",
+      "access_level": "Staff"
+    },
+    {
+      "email": "staff2@example.com",
+      "access_level": "Staff"
+    }
+]
