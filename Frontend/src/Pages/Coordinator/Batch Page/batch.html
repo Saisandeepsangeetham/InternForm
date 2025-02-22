@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Batch Details</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <nav>
+    <ul>
+      <li>Intern-Form</li>
+      <li class="name-pic">
+        <span id="userName">Coordinator Name</span>
+        <img src="path_to_picture" alt="User Picture" id="userPicture" />
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Batch Page Content -->
+  <div class="container">
+    <h1>Batch Details</h1>
+
+    <!-- Search Box -->
+    <div class="search-filter">
+      <input type="text" id="searchBox" placeholder="Search by student name, regNumber, etc." />
+      
+      <!-- Filter Dropdown -->
+      <select id="filterOption">
+        <option value="">--Select Filter--</option>
+        <option value="cdc">Students got internship through CDC</option>
+        <option value="non-cdc">Students got internship not through CDC</option>
+        <option value="academic">Students got Academic internship</option>
+        <option value="industry">Students got Industry internship</option>
+        <option value="academicYear">Students got internship in the specified Academic year</option>
+        <option value="period">Students for a given internship period</option>
+        <option value="company">Company-wise list of students</option>
+        <option value="stipend">Students with stipend more than 1 Lakh</option>
+        <option value="abroad">Students completed internship in Abroad</option>
+        <option value="india">Students completed internship in India</option>
+      </select>
+      <button id="applyFilter">Apply Filter</button>
+    </div>
+
+    <!-- Table Container -->
+    <div class="table-responsive">
+      <table id="dataTable">
+        <thead>
+          <tr>
+            <th>Reg Number</th>
+            <th>Name</th>
+            <th>Title</th>
+            <th>Mobile</th>
+            <th>Section</th>
+            <th>Internship Obtained</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Period</th>
+            <th>Company Name</th>
+            <th>Placement Source</th>
+            <th>Stipend</th>
+            <th>Internship Type</th>
+            <th>Location</th>
+            <th>File URL</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Data rows inserted dynamically -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script src="index.js"></script>
+</body>
+</html>

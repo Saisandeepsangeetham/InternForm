@@ -42,10 +42,15 @@ async function checkAuthorization(userEmail,Userdata) {
       localStorage.setItem("userName", Userdata.name);
       localStorage.setItem("userPicture",Userdata.picture); 
       
-      console.log(Userdata);// Store token
-      // Redirect to homepage
+      // console.log(Userdata);// Store token
+
+    const userRole = localStorage.getItem("userRole");
+    if (userRole === "Student") {
       window.location.href = "/src/Pages/Homepage/Index.html";
+    } else {
+      window.location.href = "/src/Pages/Coordinator/index.html";
+    }
   } catch (error) {
-      console.error("Error fetching people.json", error);
+      console.error("Error fetching staffs.json", error);
   }
 }
