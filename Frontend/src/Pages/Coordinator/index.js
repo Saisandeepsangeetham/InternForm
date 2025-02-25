@@ -1,4 +1,8 @@
+let currentData = [];
+
 function loadTableData(data) {
+  currentData = data;
+
   const tbody = document.querySelector("#dataTable tbody");
   tbody.innerHTML = ""; // Clear previous data
 
@@ -377,5 +381,56 @@ document.addEventListener("DOMContentLoaded", () => {
     .getElementById("applyPeriodFilter")
     .addEventListener("click", applyFilter);
 });
+
+function generatePDF() {
+  if (!currentData.length) {
+    console.log("No data available to generate PDF.");
+    return;
+  }
+  
+  const { jsPDF } = window.jspdf; // using UMD from CDN
+  const doc = new jsPDF(
+    orientation ='landscape'
+  );
+
+  doc.setFontSize(18);
+  doc.text("Student Details", 14, 22);
+
+  // Define table columns (order should match keys in your data)
+  const columns = [
+    { header: "Reg Number", dataKey: "regNumber" },
+    { header: "Name", dataKey: "name" },
+    { header: "Year", dataKey: "year" },
+    { header: "Title", dataKey: "title" },
+    { header: "Mobile", dataKey: "mobile" },
+    { header: "Section", dataKey: "section" },
+    { header: "Internship Obtained", dataKey: "internshipObtained" },
+    { header: "Start Date", dataKey: "startDate" },
+    { header: "End Date", dataKey: "endDate" },
+    { header: "Period", dataKey: "period" },
+    { header: "Company Name", dataKey: "companyName" },
+    { header: "Placement Source", dataKey: "placementSource" },
+    { header: "Stipend", dataKey: "stipend" },
+    { header: "Internship Type", dataKey: "internshipType" },
+    { header: "Location", dataKey: "location" },
+    { header: "File URL", dataKey: "fileUrl" }
+  ];
+
+  // Map our data into an array of arrays (rows) for autoTable
+  const tableData = currentData.map(row =>
+    columns.map(col => row[col.dataKey])
+  );
+
+  doc.autoTable({
+    startY: 30,
+    head: [columns.map(col => col.header)],
+    body: tableData,
+    styles: { fontSize: 8 },
+    headStyles: { fillColor: [0, 123, 255] }
+  });
+
+  doc.save("student_details.pdf");
+}
+
 
 document.getElementById("submitBtn").addEventListener("click", generatePDF);
