@@ -5,22 +5,32 @@
   box-sizing: border-box;
 }
 
+/* Typography */
+body {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  line-height: 1.6;
+  background-color: #f4f6f8;
+  color: #333;
+}
+
 /* Navigation Bar */
 nav {
   background-color: #007bff;
   padding: 1rem;
-  color: #fff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 nav ul {
-  list-style: none;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  list-style: none;
 }
 
-nav ul li {
-  margin: 0 1rem;
+nav .logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #fff;
 }
 
 .name-pic {
@@ -29,6 +39,7 @@ nav ul li {
 }
 
 .name-pic span {
+  color: #fff;
   margin-right: 0.5rem;
 }
 
@@ -41,48 +52,119 @@ nav ul li {
 
 /* Container */
 .container {
-  padding: 2rem;
-  background-color: #f2f2f2;
-  min-height: calc(100vh - 70px);
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1rem;
 }
 
-/* Search and Filter */
+/* Heading */
+h1 {
+  margin-bottom: 1.5rem;
+  text-align: center;
+  color: #333;
+}
+
+/* Search and Filter Section */
 .search-filter {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
-  margin-bottom: 1.5rem;
+  justify-content: center;
+  margin-bottom: 1rem;
 }
 
-.search-filter input[type="text"] {
-  flex: 1;
-  padding: 0.5rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
+.search-filter input[type="text"],
 .search-filter select {
-  padding: 0.5rem;
+  padding: 0.75rem;
   border: 1px solid #ccc;
   border-radius: 4px;
+  font-size: 1rem;
 }
 
 .search-filter button {
-  padding: 0.5rem 1rem;
+  padding: 0.75rem 1.5rem;
+  border: none;
   background-color: #007bff;
-  color: white;
+  color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.search-filter button:hover {
+  background-color: #0056b3;
+}
+
+/* Extra Input Section */
+#extraInputs {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  align-items: center;
+}
+
+/* Each container for company or period filter */
+.extra-input {
+  display: none; /* hidden by default; shown when relevant filter is selected */
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  background-color: #fff;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: min(90%, 500px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.input-group {
+  display: flex;
+  flex-direction: row;
+  gap: 0.25rem;
+}
+
+.input-group label {
+  margin-top: 5px;
+  text-align: center;
+  font-weight: 500;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.input-group input {
+  margin-left: 7px;
+  padding: 0.5rem;
+  font-size: 0.9rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 200px;
+}
+
+/* Apply button styling */
+.btn-filter {
+  background-color: #007bff;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
   border: none;
   border-radius: 4px;
   cursor: pointer;
 }
 
-/* Table Responsive */
+.btn-filter:hover {
+  background-color: #0056b3;
+}
+
+/* Table Styles */
 .table-responsive {
   overflow-x: auto;
   background-color: #fff;
   padding: 1rem;
   border-radius: 4px;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  margin-bottom: 2rem;
 }
 
 table {
@@ -90,39 +172,57 @@ table {
   border-collapse: collapse;
 }
 
-table thead tr {
+thead tr {
   background-color: #007bff;
-  color: white;
+  color: #fff;
 }
 
-table th,
-table td {
+th, td {
   padding: 0.75rem;
-  text-align: left;
   border: 1px solid #ddd;
+  text-align: left;
 }
 
-@media screen and (max-width: 600px) {
-  table thead {
+/* Center the Download PDF button and place it below the table */
+.down-filter {
+  display: block;             /* Make it a block-level element for easy centering */
+  margin: 1rem auto;          /* Auto left/right margins to center horizontally */
+  margin-top: 2rem;           /* Add some space above the button */
+  background-color: #007bff;  /* Same color scheme as other buttons (if desired) */
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.down-filter:hover {
+  background-color: #0056b3;
+}
+
+/* Responsive Table for Mobile */
+@media (max-width: 600px) {
+  thead {
     display: none;
   }
-
-  table, table tbody, table tr, table td {
+  
+  table, tbody, tr, td {
     display: block;
     width: 100%;
   }
-
-  table tr {
+  
+  tr {
     margin-bottom: 1rem;
   }
-
-  table td {
+  
+  td {
     text-align: right;
     padding-left: 50%;
     position: relative;
   }
-
-  table td::before {
+  
+  td::before {
     content: attr(data-label);
     position: absolute;
     left: 0;

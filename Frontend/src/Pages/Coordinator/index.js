@@ -1,9 +1,9 @@
 function loadTableData(data) {
-  const tbody = document.querySelector('#dataTable tbody');
-  tbody.innerHTML = ''; // Clear previous data
+  const tbody = document.querySelector("#dataTable tbody");
+  tbody.innerHTML = ""; // Clear previous data
 
-  data.forEach(item => {
-    const tr = document.createElement('tr');
+  data.forEach((item) => {
+    const tr = document.createElement("tr");
     tr.innerHTML = `
       <td data-label="Reg Number">${item.regNumber}</td>
       <td data-label="Name">${item.name}</td>
@@ -26,11 +26,11 @@ function loadTableData(data) {
   });
 }
 
-
 async function fetchAllstudents() {
   try {
-
-    const response = await fetch('http://localhost:3000/app/coordinator/allstd');
+    const response = await fetch(
+      "http://localhost:3000/app/coordinator/allstd"
+    );
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
@@ -48,12 +48,13 @@ async function fetchAllstudents() {
 
 async function fetchBatch1Students() {
   try {
-    const response = await fetch('http://localhost:3000/app/coordinator/getbatch1');
+    const response = await fetch(
+      "http://localhost:3000/app/coordinator/getbatch1"
+    );
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
     const result = await response.json();
-    
 
     if (result && result.batch1Students) {
       loadTableData(result.batch1Students);
@@ -67,12 +68,13 @@ async function fetchBatch1Students() {
 
 async function fetchBatch2Students() {
   try {
-    const response = await fetch('http://localhost:3000/app/coordinator/getbatch2');
+    const response = await fetch(
+      "http://localhost:3000/app/coordinator/getbatch2"
+    );
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
     const result = await response.json();
-    
 
     if (result && result.batch2Students) {
       loadTableData(result.batch2Students);
@@ -86,12 +88,13 @@ async function fetchBatch2Students() {
 
 async function fetchBatch3Students() {
   try {
-    const response = await fetch('http://localhost:3000/app/coordinator/getbatch3');
+    const response = await fetch(
+      "http://localhost:3000/app/coordinator/getbatch3"
+    );
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
     const result = await response.json();
-    
 
     if (result && result.batch3Students) {
       loadTableData(result.batch3Students);
@@ -105,12 +108,13 @@ async function fetchBatch3Students() {
 
 async function fetchBatch4Students() {
   try {
-    const response = await fetch('http://localhost:3000/app/coordinator/getbatch4');
+    const response = await fetch(
+      "http://localhost:3000/app/coordinator/getbatch4"
+    );
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
     const result = await response.json();
-    
 
     if (result && result.batch4Students) {
       loadTableData(result.batch4Students);
@@ -122,14 +126,15 @@ async function fetchBatch4Students() {
   }
 }
 
-async function fetchStdThroughCDC(){
+async function fetchStdThroughCDC() {
   try {
-    const response = await fetch('http://localhost:3000/app/coordinator/stdthroughcdc');
+    const response = await fetch(
+      "http://localhost:3000/app/coordinator/stdthroughcdc"
+    );
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
     const result = await response.json();
-    
 
     if (result && result.stdThroughcdc) {
       loadTableData(result.stdThroughcdc);
@@ -141,14 +146,15 @@ async function fetchStdThroughCDC(){
   }
 }
 
-async function fetchStdNotThroughCDC(){
+async function fetchStdNotThroughCDC() {
   try {
-    const response = await fetch('http://localhost:3000/app/coordinator/stdnotthroughcdc');
+    const response = await fetch(
+      "http://localhost:3000/app/coordinator/stdnotthroughcdc"
+    );
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
     const result = await response.json();
-    
 
     if (result && result.std_Not_Throughcdc) {
       loadTableData(result.std_Not_Throughcdc);
@@ -160,14 +166,15 @@ async function fetchStdNotThroughCDC(){
   }
 }
 
-async function fetchIndustryStudents(){
+async function fetchIndustryStudents() {
   try {
-    const response = await fetch('http://localhost:3000/app/coordinator/industrystd');
+    const response = await fetch(
+      "http://localhost:3000/app/coordinator/industrystd"
+    );
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
     const result = await response.json();
-    
 
     if (result && result.std_industry) {
       loadTableData(result.std_industry);
@@ -179,14 +186,15 @@ async function fetchIndustryStudents(){
   }
 }
 
-async function fetchabroadstd(){
+async function fetchabroadstd() {
   try {
-    const response = await fetch('http://localhost:3000/app/coordinator/abroad');
+    const response = await fetch(
+      "http://localhost:3000/app/coordinator/abroad"
+    );
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
     const result = await response.json();
-    
 
     if (result && result.std_abroad) {
       loadTableData(result.std_abroad);
@@ -198,14 +206,14 @@ async function fetchabroadstd(){
   }
 }
 
-async function fetchindiastd(){
+async function fetchindiastd() {
   try {
-    const response = await fetch('http://localhost:3000/app/coordinator/india');
+    const response = await fetch("http://localhost:3000/app/coordinator/india");
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
     const result = await response.json();
-    
+
     if (result && result.std_india) {
       loadTableData(result.std_india);
     } else {
@@ -218,12 +226,14 @@ async function fetchindiastd(){
 
 async function fetchHighStipendStd() {
   try {
-    const response = await fetch('http://localhost:3000/app/coordinator/stipend');
+    const response = await fetch(
+      "http://localhost:3000/app/coordinator/stipend"
+    );
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
     const result = await response.json();
-    
+
     if (result && result.studentsWithHighStipend) {
       loadTableData(result.studentsWithHighStipend);
     } else {
@@ -234,8 +244,88 @@ async function fetchHighStipendStd() {
   }
 }
 
+async function fetchCompanyWiseStd(companyName) {
+  try {
+    const response = await fetch(
+      "http://localhost:3000/app/coordinator/company",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ company: companyName }),
+      }
+    );
+    if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+    const result = await response.json();
+    if (result && result.students) {
+      loadTableData(result.students);
+    } else {
+      console.log("No data for the specified company.");
+    }
+  } catch (error) {
+    console.error("Error fetching company-wise student data:", error);
+  }
+}
+
+async function fetchStdByInternshipPeriodWithValue(periodValue) {
+  try {
+    const response = await fetch(
+      "http://localhost:3000/app/coordinator/period",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ period: periodValue }),
+      }
+    );
+    if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+    const result = await response.json();
+    if (result && result.students) {
+      loadTableData(result.students);
+    } else {
+      console.log("No data for the specified internship period.");
+    }
+  } catch (error) {
+    console.error("Error fetching internship period student data:", error);
+  }
+}
+
+function applyCompanyFilter() {
+  const companyName = document.getElementById("companyFilter").value.trim();
+  if (companyName) {
+    fetchCompanyWiseStd(companyName);
+  } else {
+    console.log("Please enter a company name.");
+  }
+}
+
+function applyPeriodFilter() {
+  const periodValue = document.getElementById("periodFilter").value.trim();
+  if (periodValue) {
+    fetchStdByInternshipPeriodWithValue(periodValue);
+  } else {
+    console.log("Please enter a period value in months.");
+  }
+}
+
 function applyFilter() {
-  const filterValue = document.getElementById('filterOption').value;
+  const filterValue = document.getElementById("filterOption").value;
+  const companyFilterContainer = document.getElementById(
+    "companyFilterContainer"
+  );
+  const periodFilterContainer = document.getElementById(
+    "periodFilterContainer"
+  );
+
+  if (filterValue === "company") {
+    companyFilterContainer.style.display = "flex";
+  } else {
+    companyFilterContainer.style.display = "none";
+  }
+
+  if (filterValue === "period") {
+    periodFilterContainer.style.display = "flex";
+  } else {
+    periodFilterContainer.style.display = "none";
+  }
 
   if (filterValue === "batch1") {
     fetchBatch1Students();
@@ -249,12 +339,13 @@ function applyFilter() {
     fetchStdThroughCDC();
   } else if (filterValue === "non-cdc") {
     fetchStdNotThroughCDC();
-  }else if (filterValue === "industry") {
-    fetchIndustryStudents();
-  // }else if (filterValue === "company") {
-  //   fetchCompanyWiseStd();
-  // } 
-  }else if (filterValue === "stipend") {
+  } else if (filterValue === "industry") {
+    fetchStdIndustry();
+  } else if (filterValue === "period") {
+    applyPeriodFilter();
+  } else if (filterValue === "company") {
+    applyCompanyFilter();
+  } else if (filterValue === "stipend") {
     fetchHighStipendStd();
   } else if (filterValue === "abroad") {
     fetchabroadstd();
@@ -264,10 +355,10 @@ function applyFilter() {
     console.log(`Filter "${filterValue}" not implemented yet.`);
   }
 }
-document.addEventListener("DOMContentLoaded", () => {
 
-  const userNameElement = document.getElementById('userName');
-  const userPictureElement = document.getElementById('userPicture');
+document.addEventListener("DOMContentLoaded", () => {
+  const userNameElement = document.getElementById("userName");
+  const userPictureElement = document.getElementById("userPicture");
   const storedName = localStorage.getItem("userName");
   const storedPicture = localStorage.getItem("userPicture");
   if (storedName) {
@@ -278,5 +369,13 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   fetchAllstudents();
-  document.getElementById('applyFilter').addEventListener('click', applyFilter);
+  document.getElementById("applyFilter").addEventListener("click", applyFilter);
+  document
+    .getElementById("applyCompanyFilter")
+    .addEventListener("click", applyFilter);
+  document
+    .getElementById("applyPeriodFilter")
+    .addEventListener("click", applyFilter);
 });
+
+document.getElementById("submitBtn").addEventListener("click", generatePDF);

@@ -217,6 +217,7 @@ export const stdCompanyWise = async (req, res, next) => {
     }
     const data = await getData();
 
+    // Filter the data for students whose companyName matches the provided company (case-insensitive).
     const filteredStudents = data.filter(student => 
       student.companyName &&
       student.companyName.toLowerCase() === company.toLowerCase()

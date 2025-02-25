@@ -10,7 +10,7 @@
   <!-- Navigation Bar -->
   <nav>
     <ul>
-      <li>Intern-Form</li>
+      <li class="logo">Intern-Form</li>
       <li class="name-pic">
         <span id="userName">Coordinator Name</span>
         <img src="path_to_picture" alt="User Picture" id="userPicture" />
@@ -18,15 +18,13 @@
     </ul>
   </nav>
 
-  <!-- Batch Page Content -->
-  <div class="container">
-    <h1>Batch Details</h1>
-
-    <!-- Search Box -->
-    <div class="search-filter">
-      <input type="text" id="searchBox" placeholder="Search by student name, regNumber, etc." />
-      
-      <!-- Filter Dropdown -->
+  <!-- Main Content -->
+  <main class="container">
+    <h1>Student Details</h1>
+    
+    <!-- Search and Filter Section -->
+    <section class="search-filter">
+      <input type="text" id="searchBox" placeholder="Search by name, regNumber, etc." />
       <select id="filterOption">
         <option value="">--Select Filter--</option>
         <option value="batch1">1st Year Students</option>
@@ -35,9 +33,7 @@
         <option value="batch4">4th Year Students</option>
         <option value="cdc">Students got internship through CDC</option>
         <option value="non-cdc">Students got internship not through CDC</option>
-        <option value="academic">Students got Academic internship</option>
         <option value="industry">Students got Industry internship</option>
-        <option value="academicYear">Students got internship in the specified Academic year</option>
         <option value="period">Students for a given internship period</option>
         <option value="company">Company-wise list of students</option>
         <option value="stipend">Students with stipend more than 1 Lakh</option>
@@ -45,10 +41,40 @@
         <option value="india">Students completed internship in India</option>
       </select>
       <button id="applyFilter">Apply Filter</button>
-    </div>
+    </section>
+    
+    <!-- Extra input fields for company and period filters -->
+    <section id="extraInputs">
+      <!-- Company Filter Container -->
+      <div id="companyFilterContainer" class="extra-input">
+        <div class="input-group">
+          <label for="companyFilter">Company Name</label>
+          <input 
+            type="text" 
+            id="companyFilter" 
+            placeholder="Enter company name" 
+          />
+        </div>
+        <button id="applyCompanyFilter" class="btn-filter">Apply</button>
+      </div>
+    
+      <!-- Period Filter Container -->
+      <div id="periodFilterContainer" class="extra-input">
+        <div class="input-group">
+          <label for="periodFilter">Internship Period (months)</label>
+          <input 
+            type="number" 
+            id="periodFilter" 
+            placeholder="Enter period in months" 
+          />
+        </div>
+        <button id="applyPeriodFilter" class="btn-filter">Apply</button>
+      </div>
+    </section>
+    
 
     <!-- Table Container -->
-    <div class="table-responsive">
+    <section class="table-responsive">
       <table id="dataTable">
         <thead>
           <tr>
@@ -71,11 +97,11 @@
           </tr>
         </thead>
         <tbody>
-          <!-- Data rows inserted dynamically -->
         </tbody>
       </table>
-    </div>
-  </div>
+    </section>
+    <button id="submitBtn" class="down-filter">Download PDF</button>
+  </main>
 
   <script src="index.js"></script>
 </body>
