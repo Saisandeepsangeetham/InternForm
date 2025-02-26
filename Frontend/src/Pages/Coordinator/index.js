@@ -292,6 +292,26 @@ async function fetchStdByInternshipPeriodWithValue(periodValue) {
   }
 }
 
+async function fetchSearchResults(query) {
+  try {
+      const response = await fetch(`http://localhost:3000/app/coordinator/search?query=${encodeURIComponent(query)}`);
+      
+      if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      const result = await response.json();
+
+      if (result && result.students) {
+          loadTableData(result.students);
+      } else {
+          console.log("No matching student data found.");
+      }
+  } catch (error) {
+      console.error("Error fetching search results:", error);
+  }
+}
+
 function applyCompanyFilter() {
   const companyName = document.getElementById("companyFilter").value.trim();
   if (companyName) {
@@ -432,5 +452,14 @@ function generatePDF() {
   doc.save("student_details.pdf");
 }
 
+document.getElementById("searchBox").addEventListener("keypress", function (event) {
+  if (event.key === "Enter") {
+      const searchQuery = event.target.value.trim(); // Get the search value
+
+      if (searchQuery) {
+          fetchSearchResults(searchQuery);
+      }
+  }
+});
 
 document.getElementById("submitBtn").addEventListener("click", generatePDF);
