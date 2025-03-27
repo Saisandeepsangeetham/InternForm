@@ -41,50 +41,112 @@ function calculateMonths() {
 startDateInput.addEventListener("change", calculateMonths);
 endDateInput.addEventListener("change", calculateMonths);
 
-document.querySelector("form").addEventListener("submit", async (event) => {
-  event.preventDefault(); // Prevent default form submission
+// Setup file upload functionality
+function setupFileUpload(inputId) {
+  const fileInput = document.getElementById(inputId);
+  const wrapper = fileInput.parentElement;
 
-  const formData = new FormData(event.target);
-  
-  const data = {
-    regNumber: formData.get("reg-number"),
-    name: localStorage.getItem("userName"),
-    year: formData.get("year"),
-    title: formData.get("title"),
-    mobile: formData.get("mobile"),
-    section: formData.get("section"),
-    internshipObtained: formData.get("internship-obtained"),
-    startDate: formData.get("start-date"),
-    endDate: formData.get("end-date"),
-    period: formData.get("period"),
-    companyName: formData.get("company-name"),
-    placementSource: formData.get("placement-source"),
-    stipend: formData.get("stipend"),
-    internshipType: formData.get("internship-type"),
-    location: formData.get("location"),
-    fileUrl: formData.get("fileUrl"),
-  };
+  // Handle drag and drop events
+  wrapper.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    wrapper.classList.add('dragover');
+  });
 
-  try {
-    const response = await fetch("http://localhost:3000/app/students/submit", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
+  wrapper.addEventListener('dragleave', () => {
+    wrapper.classList.remove('dragover');
+  });
 
-    const result = await response.json();
-    if (response.ok) {
-      alert("Form submitted successfully!");
-      event.target.reset(); // Clear the form
-    } else {
-      throw new Error(result.message || "Submission failed");
-    }
-  } catch (error) {
-    console.error("Error submitting form:", error);
-    alert("Error submitting form.");
+  wrapper.addEventListener('drop', (e) => {
+    e.preventDefault();
+    wrapper.classList.remove('dragover');
+    fileInput.files = e.dataTransfer.files;
+    updateFileName(fileInput);
+  });
+
+  // Handle click to upload
+  wrapper.addEventListener('click', () => {
+    fileInput.click();
+  });
+
+  // Update filename when file is selected
+  fileInput.addEventListener('change', () => {
+    updateFileName(fileInput);
+  });
+}
+
+function updateFileName(fileInput) {
+  const fileName = fileInput.files[0]?.name;
+  const dragDropText = fileInput.parentElement.querySelector('.drag-drop-text');
+  if (fileName) {
+    dragDropText.textContent = `Selected: ${fileName}`;
+  } else {
+    dragDropText.textContent = 'Drag and drop or click to upload';
   }
+}
+
+// Initialize file upload for all three documents
+document.addEventListener('DOMContentLoaded', () => {
+  setupFileUpload('offerLetter');
+  setupFileUpload('recommendation');
+  setupFileUpload('completion');
+
+  // Update form submission to handle files
+  document.querySelector("form").addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const formData = new FormData();
+
+    // Add all form fields
+    const formElements = event.target.elements;
+    for (let element of formElements) {
+      if (
+        element.name &&
+        element.type !== "file" &&
+        element.type !== "submit"
+      ) {
+        formData.append(element.name, element.value);
+      }
+    }
+
+    // Add files
+    const offerLetter = document.getElementById("offerLetter").files[0];
+    const recommendation = document.getElementById("recommendation").files[0];
+    const completion = document.getElementById("completion").files[0];
+
+    if (!offerLetter || !recommendation || !completion) {
+      alert("Please upload all required documents");
+      return;
+    }
+
+    formData.append("offerLetter", offerLetter);
+    formData.append("recommendation", recommendation);
+    formData.append("completion", completion);
+
+    try {
+      const response = await fetch(
+        "http://localhost:3000/app/students/submit",
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
+
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.message || "Submission failed");
+      }
+
+      const result = await response.json();
+      alert("Form submitted successfully!");
+      event.target.reset();
+      document.querySelectorAll(".drag-drop-text").forEach((text) => {
+        text.textContent = "Drag and drop or click to upload";
+      });
+    } catch (error) {
+      console.error("Error:", error);
+      alert(error.message || "Error submitting form");
+    }
+  });
 });
 
 

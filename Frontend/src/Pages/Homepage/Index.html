@@ -102,14 +102,44 @@
           <option value="India">India</option>
         </select>
 
-        <label for="fileUrl">Google Drive Link</label>
-        <input
-          type="url"
-          name="fileUrl"
-          id="fileUrl"
-          placeholder="Paste Google Drive link here"
-          required
-        />
+        <!-- Replace the fileUrl input with this -->
+<div class="file-upload-container">
+  <label for="offerLetter">Internship Offer Letter</label>
+  <div class="file-input-wrapper">
+    <input 
+      type="file" 
+      name="offerLetter" 
+      id="offerLetter" 
+      accept=".pdf,.doc,.docx" 
+      required 
+    />
+    <div class="drag-drop-text">Drag and drop or click to upload</div>
+  </div>
+
+  <label for="recommendation">Letter of Recommendation</label>
+  <div class="file-input-wrapper">
+    <input 
+      type="file" 
+      name="recommendation" 
+      id="recommendation" 
+      accept=".pdf,.doc,.docx" 
+      required 
+    />
+    <div class="drag-drop-text">Drag and drop or click to upload</div>
+  </div>
+
+  <label for="completion">Completion Certificate</label>
+  <div class="file-input-wrapper">
+    <input 
+      type="file" 
+      name="completion" 
+      id="completion" 
+      accept=".pdf,.doc,.docx" 
+      required 
+    />
+    <div class="drag-drop-text">Drag and drop or click to upload</div>
+  </div>
+</div>
         
         <button type="submit">Submit</button>
       </form>

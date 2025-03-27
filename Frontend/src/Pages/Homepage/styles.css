@@ -115,3 +115,37 @@ form {
   * {
     -ms-overflow-style: none;
   }
+/* Add these styles */
+.file-upload-container {
+  margin: 20px 0;
+}
+
+.file-input-wrapper {
+  border: 2px dashed #007bff;
+  border-radius: 4px;
+  padding: 20px;
+  text-align: center;
+  margin: 10px 0;
+  background-color: #f8f9fa;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.file-input-wrapper:hover {
+  background-color: #e9ecef;
+}
+
+.file-input-wrapper input[type="file"] {
+  display: none;
+}
+
+.drag-drop-text {
+  color: #6c757d;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+.file-input-wrapper.dragover {
+  background-color: #e3f2fd;
+  border-color: #0056b3;
+}
