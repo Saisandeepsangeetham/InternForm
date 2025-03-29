@@ -4,19 +4,35 @@
   box-sizing: border-box;
 }
 
-/* Typography */
 body {
   font-family: 'Helvetica Neue', Arial, sans-serif;
   line-height: 1.6;
-  background-color: #f4f6f8;
-  color: #333;
+  background-color: #333;
+  position: relative;
+  min-height: 100vh;
+  margin: 0;
 }
 
-/* Navigation Bar */
+.background-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('../../../assets/ssn-campus.jpg') no-repeat center center/cover;
+  filter: brightness(0.7);
+  z-index: -1;
+}
+
 nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
   background-color: #007bff;
   padding: 1rem;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  z-index: 1000;
 }
 
 nav ul {
@@ -29,7 +45,7 @@ nav ul {
 nav .logo {
   font-size: 1.5rem;
   font-weight: bold;
-  color: #fff;
+  color: #ffffff;
 }
 
 .name-pic {
@@ -38,7 +54,7 @@ nav .logo {
 }
 
 .name-pic span {
-  color: #fff;
+  color: #ffffff;
   margin-right: 0.5rem;
 }
 
@@ -49,14 +65,22 @@ nav .logo {
   object-fit: cover;
 }
 
-.form-container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 600px;
+  margin: 100px auto;
+  padding: 20px;
+  background-color: #ffffff; 
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1; 
 }
 
 form {
-    background-color: #fff;
+    background-color: #ffffff;
+    color: black;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -99,23 +123,19 @@ form {
     background-color: #0056b3;
   }
 
-  /* Hide scrollbar for Chrome, Safari, and Edge */
 ::-webkit-scrollbar {
     width: 0px;
     height: 0px;
     display: none;
   }
   
-  /* Hide scrollbar for Firefox */
   * {
     scrollbar-width: none;
   }
   
-  /* Hide scrollbar for IE and Edge */
   * {
     -ms-overflow-style: none;
   }
-/* Add these styles */
 .file-upload-container {
   margin: 20px 0;
 }

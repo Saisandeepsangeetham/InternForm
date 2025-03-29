@@ -24,7 +24,9 @@ function loadTableData(data) {
       <td data-label="Stipend">${item.stipend}</td>
       <td data-label="Internship Type">${item.internshipType}</td>
       <td data-label="Location">${item.location}</td>
-      <td data-label="Drive File URL">${item.driveLinkUrl}</td>
+      <td data-label="Drive File URL">
+      <a href="${item.driveLinkUrl}" target="_blank">${item.name}_Drive</a>
+      </td>
     `;
     tbody.appendChild(tr);
   });
@@ -294,21 +296,25 @@ async function fetchStdByInternshipPeriodWithValue(periodValue) {
 
 async function fetchSearchResults(query) {
   try {
-      const response = await fetch(`http://localhost:3000/app/coordinator/search?query=${encodeURIComponent(query)}`);
-      
-      if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-      }
+    const response = await fetch(
+      `http://localhost:3000/app/coordinator/search?query=${encodeURIComponent(
+        query
+      )}`
+    );
 
-      const result = await response.json();
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
 
-      if (result && result.students) {
-          loadTableData(result.students);
-      } else {
-          console.log("No matching student data found.");
-      }
+    const result = await response.json();
+
+    if (result && result.students) {
+      loadTableData(result.students);
+    } else {
+      console.log("No matching student data found.");
+    }
   } catch (error) {
-      console.error("Error fetching search results:", error);
+    console.error("Error fetching search results:", error);
   }
 }
 
@@ -402,64 +408,84 @@ document.addEventListener("DOMContentLoaded", () => {
     .addEventListener("click", applyFilter);
 });
 
-function generatePDF() {
+function generateExcel() {
   if (!currentData.length) {
-    console.log("No data available to generate PDF.");
+    console.log("No data available to generate Excel file.");
     return;
   }
-  
-  const { jsPDF } = window.jspdf; // using UMD from CDN
-  const doc = new jsPDF(
-    orientation ='landscape'
-  );
 
-  doc.setFontSize(18);
-  doc.text("Student Details", 14, 22);
+  // Prepare the data for Excel
+  const excelData = currentData.map((row) => ({
+    "Register Number": row.regNumber,
+    Name: row.name,
+    Year: row.year,
+    Title: row.title,
+    Mobile: row.mobile,
+    Section: row.section,
+    "Internship Obtained": row.internshipObtained,
+    "Start Date": new Date(row.startDate).toLocaleDateString(),
+    "End Date": new Date(row.endDate).toLocaleDateString(),
+    Period: row.period,
+    "Company Name": row.companyName,
+    "Placement Source": row.placementSource,
+    Stipend: row.stipend,
+    "Internship Type": row.internshipType,
+    Location: row.location,
+    "Drive Link": `${row.name}_Drive`,
+  }));
 
-  // Define table columns (order should match keys in your data)
-  const columns = [
-    { header: "Reg Number", dataKey: "regNumber" },
-    { header: "Name", dataKey: "name" },
-    { header: "Year", dataKey: "year" },
-    { header: "Title", dataKey: "title" },
-    { header: "Mobile", dataKey: "mobile" },
-    { header: "Section", dataKey: "section" },
-    { header: "Internship Obtained", dataKey: "internshipObtained" },
-    { header: "Start Date", dataKey: "startDate" },
-    { header: "End Date", dataKey: "endDate" },
-    { header: "Period", dataKey: "period" },
-    { header: "Company Name", dataKey: "companyName" },
-    { header: "Placement Source", dataKey: "placementSource" },
-    { header: "Stipend", dataKey: "stipend" },
-    { header: "Internship Type", dataKey: "internshipType" },
-    { header: "Location", dataKey: "location" },
-    { header: "File URL", dataKey: "driveLinkUrl" }
-  ];
+  try {
+    // Create a new workbook using the global XLSX object
+    const wb = XLSX.utils.book_new();
+    const ws = XLSX.utils.json_to_sheet(excelData);
 
-  // Map our data into an array of arrays (rows) for autoTable
-  const tableData = currentData.map(row =>
-    columns.map(col => row[col.dataKey])
-  );
+    // Add hyperlinks to the Drive Link column
+    excelData.forEach((row, index) => {
+      const cellRef = XLSX.utils.encode_cell({ r: index + 1, c: 15 });
+      if (!ws[cellRef]) ws[cellRef] = {};
+      ws[cellRef].l = { Target: currentData[index].driveLinkUrl };
+    });
 
-  doc.autoTable({
-    startY: 30,
-    head: [columns.map(col => col.header)],
-    body: tableData,
-    styles: { fontSize: 8 },
-    headStyles: { fillColor: [0, 123, 255] }
-  });
+    // Set column widths
+    ws["!cols"] = [
+      { wch: 15 }, // Register Number
+      { wch: 20 }, // Name
+      { wch: 10 }, // Year
+      { wch: 30 }, // Title
+      { wch: 12 }, // Mobile
+      { wch: 8 }, // Section
+      { wch: 15 }, // Internship Obtained
+      { wch: 12 }, // Start Date
+      { wch: 12 }, // End Date
+      { wch: 8 }, // Period
+      { wch: 25 }, // Company Name
+      { wch: 15 }, // Placement Source
+      { wch: 10 }, // Stipend
+      { wch: 15 }, // Internship Type
+      { wch: 10 }, // Location
+      { wch: 20 }, // Drive Link
+    ];
 
-  doc.save("student_details.pdf");
+    // Add the worksheet to the workbook
+    XLSX.utils.book_append_sheet(wb, ws, "Student Details");
+
+    // Generate Excel file
+    XLSX.writeFile(wb, "student_details.xlsx");
+  } catch (error) {
+    console.error("Error generating Excel file:", error);
+  }
 }
 
-document.getElementById("searchBox").addEventListener("keypress", function (event) {
-  if (event.key === "Enter") {
+document
+  .getElementById("searchBox")
+  .addEventListener("keypress", function (event) {
+    if (event.key === "Enter") {
       const searchQuery = event.target.value.trim(); // Get the search value
 
       if (searchQuery) {
-          fetchSearchResults(searchQuery);
+        fetchSearchResults(searchQuery);
       }
-  }
-});
+    }
+  });
 
-document.getElementById("submitBtn").addEventListener("click", generatePDF);
+document.getElementById("submitBtn").addEventListener("click", generateExcel);
