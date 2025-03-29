@@ -21,7 +21,8 @@ const auth = new google.auth.GoogleAuth({
 
 const drive = google.drive({ version: 'v3', auth });
 
-export const createFolder = async(folderName, parentId) =>{
+export const createFolder = async(folderName) =>{
+  const parentId = process.env.GOOGLE_DRIVE_PARENT_FOLDER_ID;
   const fileMetadata = {
     name: folderName,
     mimeType: 'application/vnd.google-apps.folder',
@@ -33,7 +34,18 @@ export const createFolder = async(folderName, parentId) =>{
     fields: 'id',
   });
 
-  return response.data.id;
+  const folderId =  response.data.id;
+
+  await drive.permissions.create({
+    fileId: folderId,
+    requestBody: {
+      role: 'reader',
+      type: 'anyone',
+      allowFileDiscovery: false,
+    }
+  });
+
+  return folderId;
 }
 
 export const uploadFile = async(filePath, fileName, mimeType, parentFolderId)=> {

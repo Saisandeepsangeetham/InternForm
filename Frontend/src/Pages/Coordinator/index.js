@@ -24,7 +24,7 @@ function loadTableData(data) {
       <td data-label="Stipend">${item.stipend}</td>
       <td data-label="Internship Type">${item.internshipType}</td>
       <td data-label="Location">${item.location}</td>
-      <td data-label="File URL">${item.fileUrl}</td>
+      <td data-label="Drive File URL">${item.driveLinkUrl}</td>
     `;
     tbody.appendChild(tr);
   });
@@ -433,7 +433,7 @@ function generatePDF() {
     { header: "Stipend", dataKey: "stipend" },
     { header: "Internship Type", dataKey: "internshipType" },
     { header: "Location", dataKey: "location" },
-    { header: "File URL", dataKey: "fileUrl" }
+    { header: "File URL", dataKey: "driveLinkUrl" }
   ];
 
   // Map our data into an array of arrays (rows) for autoTable

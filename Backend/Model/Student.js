@@ -68,15 +68,7 @@ const studentSchema = new mongoose.Schema({
     required: true,
     enum: ['Abroad', 'India']
   },
-  offerLetterUrl: {
-    type: String,
-    required: true
-  },
-  recommendationUrl: {
-    type: String,
-    required: true
-  },
-  completionCertificateUrl: {
+  driveLinkUrl: {
     type: String,
     required: true
   }

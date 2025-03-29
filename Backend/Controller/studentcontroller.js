@@ -44,7 +44,6 @@ export const handleSubmit = async (req, res) => {
     }
 
     try {
-      // Check if all required files are present
       if (!req.files?.offerLetter || !req.files?.recommendation || !req.files?.completion) {
         return res.status(400).json({ message: "All files are required" });
       }
@@ -54,7 +53,6 @@ export const handleSubmit = async (req, res) => {
 
       const folderId = await createFolder(folderName);
 
-      // Upload files to Google Drive with custom names
       const offerLetterFile = await uploadFile(
         req.files.offerLetter[0].path,
         `${name}_offer_letter${path.extname(req.files.offerLetter[0].originalname)}`,
@@ -76,6 +74,8 @@ export const handleSubmit = async (req, res) => {
         folderId
       );
 
+      const driveLinkurl = `https://drive.google.com/drive/folders/${folderId}`;
+
       const studentData = {
         regNumber: req.body["reg-number"],
         name: req.body.name,
@@ -92,15 +92,12 @@ export const handleSubmit = async (req, res) => {
         stipend: Number(req.body.stipend) || 0,
         internshipType: req.body["internship-type"],
         location: req.body.location,
-        offerLetterUrl: offerLetterFile.webViewLink,
-        recommendationUrl: recommendationFile.webViewLink,
-        completionCertificateUrl: completionFile.webViewLink
+        driveLinkUrl: driveLinkurl
       };
 
       const student = new Student(studentData);
       await student.save();
 
-      // Clean up local files after successful upload
       Object.values(req.files).forEach(fileArray => {
         fileArray.forEach(file => {
           fs.unlink(file.path, err => {
@@ -115,7 +112,6 @@ export const handleSubmit = async (req, res) => {
       });
     } catch (error) {
       console.error("Error saving student data:", error);
-      // Delete uploaded files if process fails
       if (req.files) {
         Object.values(req.files).forEach(fileArray => {
           fileArray.forEach(file => {
