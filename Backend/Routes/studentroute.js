@@ -5,6 +5,9 @@ import { createFolder } from "../Configuration/googleDriveService.js"; // Note t
 const Std_router = express.Router();
 
 Std_router.post('/submit', handleSubmit);
+
+// Endpoint to create a test folder in Google Drive
+// This is just an example; you can modify it as needed
 Std_router.get('/test-folder', async (req, res) => {
   try {
     const internshipFolderId = process.env.GOOGLE_DRIVE_PARENT_FOLDER_ID; // Replace with your actual folder ID

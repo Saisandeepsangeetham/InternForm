@@ -4,25 +4,23 @@ window.onload = function () {
     callback: handleCredentialResponse,
   });
 
-  // Render the Google Sign-In button with a custom theme
   google.accounts.id.renderButton(
     document.querySelector(".google-login-button"),
     {
-      theme: "outline", // Use the outline theme for better customization
-      size: "large", // Adjust the size of the button
-      shape: "pill", // Make the button rounded
-      text: "signin_with", // Use "Sign in with Google" text
-      logo_alignment: "left", // Align the Google logo to the left
+      theme: "outline",
+      size: "large", 
+      shape: "pill", 
+      text: "signin_with",
+      logo_alignment: "left", 
     }
   );
 
-  google.accounts.id.prompt(); // Show login prompt if user is not signed in
+  google.accounts.id.prompt(); 
 };
 
 function handleCredentialResponse(response) {
   console.log("Encoded JWT ID Token: " + response.credential);
 
-  // Decode JWT Token (Optional)
   const data = JSON.parse(atob(response.credential.split(".")[1]));
   console.log("User Info:", data);
 
@@ -31,21 +29,20 @@ function handleCredentialResponse(response) {
 
 async function checkAuthorization(userEmail, Userdata) {
   try {
-    const response = await fetch("/staffs.json"); // Fetch JSON from public folder
+    const response = await fetch("/staffs.json"); 
     const data = await response.json();
 
-    // Check if the email exists in people.json
     const user = data.find((person) => person.email === userEmail);
 
     if (user) {
       console.log(`Access Level: ${user.access_level}`);
-      localStorage.setItem("userRole", user.access_level); // Store role
+      localStorage.setItem("userRole", user.access_level); 
     } else {
       console.log("User is a Student");
-      localStorage.setItem("userRole", "Student"); // Default role
+      localStorage.setItem("userRole", "Student");
     }
 
-    localStorage.setItem("userEmail", userEmail); // Store email
+    localStorage.setItem("userEmail", userEmail);
     localStorage.setItem("userName", Userdata.name);
     localStorage.setItem("userPicture", Userdata.picture);
 

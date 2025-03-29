@@ -1,6 +1,5 @@
 import Student from '../Model/Student.js';
 
-// Get all students
 export const getAllstudents = async (req, res) => {
   try {
     const students = await Student.find();
@@ -10,7 +9,6 @@ export const getAllstudents = async (req, res) => {
   }
 };
 
-// Get 1st year students
 export const handleBatch1 = async (req, res) => {
   try {
     const batch1Students = await Student.find({ year: '1st Year' });
@@ -20,7 +18,6 @@ export const handleBatch1 = async (req, res) => {
   }
 };
 
-// Get 2nd year students
 export const handleBatch2 = async (req, res) => {
   try {
     const batch2Students = await Student.find({ year: '2nd Year' });
@@ -30,7 +27,6 @@ export const handleBatch2 = async (req, res) => {
   }
 };
 
-// Get 3rd year students
 export const handleBatch3 = async (req, res) => {
   try {
     const batch3Students = await Student.find({ year: '3rd Year' });
@@ -40,7 +36,6 @@ export const handleBatch3 = async (req, res) => {
   }
 };
 
-// Get 4th year students
 export const handleBatch4 = async (req, res) => {
   try {
     const batch4Students = await Student.find({ year: '4th Year' });
@@ -50,7 +45,6 @@ export const handleBatch4 = async (req, res) => {
   }
 };
 
-// Get students through CDC
 export const stdThroughCDC = async (req, res) => {
   try {
     const stdThroughcdc = await Student.find({ placementSource: 'Through CDC' });
@@ -60,7 +54,6 @@ export const stdThroughCDC = async (req, res) => {
   }
 };
 
-// Get students not through CDC
 export const std_Not_ThroughCDC = async (req, res) => {
   try {
     const std_Not_Throughcdc = await Student.find({ placementSource: 'Off Campus' });
@@ -70,7 +63,6 @@ export const std_Not_ThroughCDC = async (req, res) => {
   }
 };
 
-// Get students with industry internships
 export const std_Industry_intern = async (req, res) => {
   try {
     const std_industry = await Student.find({ internshipType: 'Industry' });
@@ -80,7 +72,6 @@ export const std_Industry_intern = async (req, res) => {
   }
 };
 
-// Get students with abroad internships
 export const std_Abroad = async (req, res) => {
   try {
     const std_abroad = await Student.find({ location: 'Abroad' });
@@ -90,7 +81,6 @@ export const std_Abroad = async (req, res) => {
   }
 };
 
-// Get students with India internships
 export const std_India = async (req, res) => {
   try {
     const std_india = await Student.find({ location: 'India' });
@@ -100,7 +90,6 @@ export const std_India = async (req, res) => {
   }
 };
 
-// Get students with high stipend
 export const stdStipendMoreThanLakh = async (req, res) => {
   try {
     const studentsWithHighStipend = await Student.find({ stipend: { $gt: 100000 } });
@@ -110,7 +99,6 @@ export const stdStipendMoreThanLakh = async (req, res) => {
   }
 };
 
-// Get students by company
 export const stdCompanyWise = async (req, res) => {
   try {
     const { company } = req.body;
@@ -123,7 +111,6 @@ export const stdCompanyWise = async (req, res) => {
   }
 };
 
-// Get students by internship period
 export const stdByInternshipPeriod = async (req, res) => {
   try {
     const { period } = req.body;
@@ -134,7 +121,6 @@ export const stdByInternshipPeriod = async (req, res) => {
   }
 };
 
-// Search students by name or registration number
 export const stdByNameRegNo = async (req, res) => {
   try {
     const { query } = req.query;

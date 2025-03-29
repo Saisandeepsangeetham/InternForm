@@ -4,7 +4,7 @@ function loadTableData(data) {
   currentData = data;
 
   const tbody = document.querySelector("#dataTable tbody");
-  tbody.innerHTML = ""; // Clear previous data
+  tbody.innerHTML = ""; 
 
   data.forEach((item) => {
     const tr = document.createElement("tr");
@@ -414,7 +414,6 @@ function generateExcel() {
     return;
   }
 
-  // Prepare the data for Excel
   const excelData = currentData.map((row) => ({
     "Register Number": row.regNumber,
     Name: row.name,
@@ -435,18 +434,15 @@ function generateExcel() {
   }));
 
   try {
-    // Create a new workbook using the global XLSX object
     const wb = XLSX.utils.book_new();
     const ws = XLSX.utils.json_to_sheet(excelData);
 
-    // Add hyperlinks to the Drive Link column
     excelData.forEach((row, index) => {
       const cellRef = XLSX.utils.encode_cell({ r: index + 1, c: 15 });
       if (!ws[cellRef]) ws[cellRef] = {};
       ws[cellRef].l = { Target: currentData[index].driveLinkUrl };
     });
 
-    // Set column widths
     ws["!cols"] = [
       { wch: 15 }, // Register Number
       { wch: 20 }, // Name
@@ -466,10 +462,8 @@ function generateExcel() {
       { wch: 20 }, // Drive Link
     ];
 
-    // Add the worksheet to the workbook
     XLSX.utils.book_append_sheet(wb, ws, "Student Details");
 
-    // Generate Excel file
     XLSX.writeFile(wb, "student_details.xlsx");
   } catch (error) {
     console.error("Error generating Excel file:", error);
@@ -480,7 +474,7 @@ document
   .getElementById("searchBox")
   .addEventListener("keypress", function (event) {
     if (event.key === "Enter") {
-      const searchQuery = event.target.value.trim(); // Get the search value
+      const searchQuery = event.target.value.trim(); 
 
       if (searchQuery) {
         fetchSearchResults(searchQuery);

@@ -41,12 +41,10 @@ function calculateMonths() {
 startDateInput.addEventListener("change", calculateMonths);
 endDateInput.addEventListener("change", calculateMonths);
 
-// Setup file upload functionality
 function setupFileUpload(inputId) {
   const fileInput = document.getElementById(inputId);
   const wrapper = fileInput.parentElement;
 
-  // Handle drag and drop events
   wrapper.addEventListener('dragover', (e) => {
     e.preventDefault();
     wrapper.classList.add('dragover');
@@ -63,12 +61,10 @@ function setupFileUpload(inputId) {
     updateFileName(fileInput);
   });
 
-  // Handle click to upload
   wrapper.addEventListener('click', () => {
     fileInput.click();
   });
 
-  // Update filename when file is selected
   fileInput.addEventListener('change', () => {
     updateFileName(fileInput);
   });
@@ -84,19 +80,16 @@ function updateFileName(fileInput) {
   }
 }
 
-// Initialize file upload for all three documents
 document.addEventListener('DOMContentLoaded', () => {
   setupFileUpload('offerLetter');
   setupFileUpload('recommendation');
   setupFileUpload('completion');
 
-  // Update form submission to handle files
   document.querySelector("form").addEventListener("submit", async (event) => {
     event.preventDefault();
 
     const formData = new FormData();
 
-    // Add all form fields
     const formElements = event.target.elements;
     for (let element of formElements) {
       if (
@@ -108,7 +101,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
-    // Add files
     const offerLetter = document.getElementById("offerLetter").files[0];
     const recommendation = document.getElementById("recommendation").files[0];
     const completion = document.getElementById("completion").files[0];

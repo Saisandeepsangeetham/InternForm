@@ -127,7 +127,7 @@ h1 {
   }
 
   .image-section {
-    display: none; /* Hide image slider on mobile devices */
+    display: none; 
   }
 
   .form-section {

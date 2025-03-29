@@ -7,7 +7,6 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <!-- Navigation Bar -->
   <nav>
     <ul>
       <li class="logo">Intern-Form</li>
@@ -18,11 +17,9 @@
     </ul>
   </nav>
 
-  <!-- Main Content -->
   <main class="container">
     <h1>Student Details</h1>
     
-    <!-- Search and Filter Section -->
     <section class="search-filter">
       <input type="text" id="searchBox" placeholder="Search by name, regNumber, etc." />
       <select id="filterOption">
@@ -43,9 +40,7 @@
       <button id="applyFilter">Apply Filter</button>
     </section>
     
-    <!-- Extra input fields for company and period filters -->
     <section id="extraInputs">
-      <!-- Company Filter Container -->
       <div id="companyFilterContainer" class="extra-input">
         <div class="input-group">
           <label for="companyFilter">Company Name</label>
@@ -58,7 +53,6 @@
         <button id="applyCompanyFilter" class="btn-filter">Apply</button>
       </div>
     
-      <!-- Period Filter Container -->
       <div id="periodFilterContainer" class="extra-input">
         <div class="input-group">
           <label for="periodFilter">Internship Period (months)</label>
@@ -73,7 +67,6 @@
     </section>
     
 
-    <!-- Table Container -->
     <section class="table-responsive">
       <table id="dataTable">
         <thead>
